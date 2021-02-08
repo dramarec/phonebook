@@ -1,15 +1,14 @@
 import React from 'react';
 import styles from './Find.module.css';
-// import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
-import { setFilter } from '../../redux/actions/contactsActions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { setFilter } from '../../redux/contacts/contactsActions';
+import contactsSelectors from '../../redux/contacts/contactsSelectors';
 
-const FindContact = () => {
-    const filter = useSelector(state => state.reducerContacts.filter);
-    const dispatch = useDispatch();
+const FindContact = ({ filter, setFilter }) => {
     const onHandleChange = e => {
         const { value } = e.target;
-        dispatch(setFilter(value));
+        setFilter(value);
     };
     return (
         <>
@@ -24,9 +23,20 @@ const FindContact = () => {
     );
 };
 
-export default FindContact;
+const mapStateToProps = state => ({
+    filter: contactsSelectors.getFilter(state),
+});
 
-// FindContact.propTypes = {
-//     filter: PropTypes.string.isRequired,
-//     setFilter: PropTypes.func.isRequired,
-// };
+const mapDispatchToProps = dispatch => {
+    return {
+        setFilter: id => {
+            dispatch(setFilter(id));
+        },
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(FindContact);
+
+FindContact.propTypes = {
+    filter: PropTypes.string.isRequired,
+    setFilter: PropTypes.func.isRequired,
+};
