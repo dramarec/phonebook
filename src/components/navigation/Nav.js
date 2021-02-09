@@ -1,28 +1,31 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { signOut } from '../../redux/auth/authActions';
 import { phbookRoutes } from '../../routes/phbookRoutes';
 import Container from '../layout/container/Container';
 import styles from './Nav.module.css';
+import NavItem from './NavItem';
 
 const Navigation = () => {
+    const isAuth = useSelector(state => state.auth.isAuth);
+
+    const dispatch = useDispatch();
+    const onHandleClick = () => {
+        dispatch(signOut());
+    };
     return (
         <Container>
-            <nav>
+            <nav className={styles.navbar}>
                 <ul className={styles.list}>
-                    {phbookRoutes.map(({ path, name, exact }) => (
-                        <li className={styles.listItem} key={path}>
-                            <NavLink
-                                to={path}
-                                exact={exact}
-                                className="link"
-                                activeClassName="active-link"
-                            >
-                                {name}
-                            </NavLink>
-                        </li>
+                    {phbookRoutes.map(route => (
+                        <NavItem {...route} isAuth={isAuth} key={route.path} />
                     ))}
                 </ul>
             </nav>
+            <button className={styles.button} onClick={onHandleClick}>
+                Logout
+            </button>
         </Container>
     );
 };

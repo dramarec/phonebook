@@ -9,10 +9,11 @@ import {
 } from './contactsActions';
 
 const addNewContactOperations = contacts => async (dispatch, getState) => {
+    const idToken = getState().auth.idToken;
     dispatch(setLoading());
     try {
         const response = await axios.post(
-            `${process.env.REACT_APP_BASE_URL}/contacts.json`,
+            `${process.env.REACT_APP_BASE_URL}/contacts.json?auth${idToken}`,
             contacts,
         );
         dispatch(addNewContact({ ...contacts, id: response.data.name }));
@@ -23,11 +24,12 @@ const addNewContactOperations = contacts => async (dispatch, getState) => {
     }
 };
 
-const getContactOperations = () => async dispatch => {
+const getContactOperations = () => async (dispatch, getState) => {
+    const idToken = getState().auth.idToken;
     dispatch(setLoading());
     try {
         const response = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/contacts.json`,
+            `${process.env.REACT_APP_BASE_URL}/contacts.json?auth${idToken}`,
         );
         const contacts = Object.keys(response.data).map(key => ({
             ...response.data[key],

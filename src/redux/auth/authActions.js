@@ -1,32 +1,43 @@
-import { createAction } from '@reduxjs/toolkit';
+import { SIGNIN, SIGNOUT, SIGNUP, SETLOADING, SETERROR } from './authConstants';
 
-const registerRequest = createAction('auth/registerRequest');
-const registerSuccess = createAction('auth/registerSuccess');
-const registerError = createAction('auth/registerError');
+const signUp = user => ({ type: SIGNUP, payload: user });
+const signIn = user => ({ type: SIGNIN, payload: user });
+const signOut = () => ({ type: SIGNOUT });
+const setLoading = () => ({ type: SETLOADING });
+const setError = error => ({ type: SETERROR, payload: error });
 
-const loginRequest = createAction('auth/loginRequest');
-const loginSuccess = createAction('auth/loginSuccess');
-const loginError = createAction('auth/loginError');
+export { signUp, signIn, signOut, setLoading, setError };
+//
+//==============================================
+// import { createAction } from '@reduxjs/toolkit';
 
-const logoutRequest = createAction('auth/logoutRequest');
-const logoutSuccess = createAction('auth/logoutSuccess');
-const logoutError = createAction('auth/logoutError');
+// const registerRequest = createAction('@auth/registerRequest');
+// const registerSuccess = createAction('@auth/registerSuccess');
+// const registerError = createAction('@auth/registerError');
 
-const getCurrentUserRequest = createAction('auth/getCurrentUserRequest');
-const getCurrentUserSuccess = createAction('auth/getCurrentUserSuccess');
-const getCurrentUserError = createAction('auth/getCurrentUserError');
+// const loginRequest = createAction('@auth/loginRequest');
+// const loginSuccess = createAction('@auth/loginSuccess');
+// const loginError = createAction('@auth/loginError');
 
-export {
-    registerRequest,
-    registerSuccess,
-    registerError,
-    logoutRequest,
-    logoutSuccess,
-    logoutError,
-    loginRequest,
-    loginSuccess,
-    loginError,
-    getCurrentUserRequest,
-    getCurrentUserSuccess,
-    getCurrentUserError,
-};
+// const logoutRequest = createAction('@auth/logoutRequest');
+// const logoutSuccess = createAction('@auth/logoutSuccess');
+// const logoutError = createAction('@auth/logoutError');
+
+// const getCurrentUserRequest = createAction('@auth/getCurrentUserRequest');
+// const getCurrentUserSuccess = createAction('@auth/getCurrentUserSuccess');
+// const getCurrentUserError = createAction('@auth/getCurrentUserError');
+
+// export {
+//     registerRequest,
+//     registerSuccess,
+//     registerError,
+//     logoutRequest,
+//     logoutSuccess,
+//     logoutError,
+//     loginRequest,
+//     loginSuccess,
+//     loginError,
+//     getCurrentUserRequest,
+//     getCurrentUserSuccess,
+//     getCurrentUserError,
+// };

@@ -5,7 +5,7 @@ import { setAlert } from '../../redux/contacts/contactsActions';
 import {
     addNewContactOperations,
     editContactOperations,
-} from '../../redux/contacts/contactOperations';
+} from '../../redux/contacts/contactsOperations';
 
 const initialState = {
     name: '',
