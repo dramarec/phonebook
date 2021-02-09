@@ -4,7 +4,7 @@ import ContactsItem from './contactsItem/ContactsItem';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import styles from './Contacts.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContactOperations } from '../../redux/operations/contactOperations';
+import { deleteContactOperations } from '../../redux/contacts/contactOperations';
 import Form from '../form/Form';
 
 const ContactsList = () => {

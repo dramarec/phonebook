@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Form.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { setAlert } from '../../redux/actions/contactsActions';
+import { setAlert } from '../../redux/contacts/contactsActions';
 import {
     addNewContactOperations,
     editContactOperations,
-} from '../../redux/operations/contactOperations';
+} from '../../redux/contacts/contactOperations';
 
 const initialState = {
     name: '',
@@ -75,7 +75,7 @@ const Form = ({ data = { ...initialState }, isEdit = false, closeForm }) => {
                 </label>
 
                 {setLoading ? (
-                    <h2>Loading...</h2>
+                    <p className={styles.loading}>Loading...</p>
                 ) : (
                     <button className={styles.button} type="submit">
                         {isEdit ? 'Edit Contact' : ' Add contact'}

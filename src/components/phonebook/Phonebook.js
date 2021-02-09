@@ -5,11 +5,13 @@ import styles from './Phonebook.module.css';
 import { Empty, Used } from '../natification/Natification';
 
 import Form from '../form/Form';
-import Header from '../header/Header';
+// import Header from '../header/Header';
 import Section from '../section/Section';
+import Layout from '../layout/Layout';
+
 import ContactsList from '../contacts/ContactsList';
 import FindContact from '../findContact/FindContact';
-import { getContactOperations } from '../../redux/operations/contactOperations';
+import { getContactOperations } from '../../redux/contacts/contactOperations';
 
 const Phonebook = () => {
     const dispatch = useDispatch();
@@ -28,33 +30,33 @@ const Phonebook = () => {
     );
     return (
         <>
-            <CSSTransition
+            {/* <CSSTransition
                 in={true}
                 appear={true}
                 classNames={styles}
                 timeout={500}
                 unmountOnExit
             >
-                <Header title="Home Work #2 Phonebook" />
-            </CSSTransition>
+                <Header title="Home Work Phonebook" />
+            </CSSTransition> */}
 
-            <Section title="Phonebook">
+            <Layout title="Phonebook">
                 <Form />
-            </Section>
+            </Layout>
 
             {contacts.length > 1 && (
-                <Section title="Finder contacts">
+                <Layout title="Finder contacts">
                     <FindContact />
-                </Section>
+                </Layout>
             )}
 
             {contacts.length > 0 || (
-                <Section title="Phonebook is empty. Please add contact" />
+                <Layout title="Phonebook is empty. Please add contact" />
             )}
             {contacts.length > 0 && (
-                <Section title="My Contacts">
+                <Layout title="My Contacts">
                     <ContactsList />
-                </Section>
+                </Layout>
             )}
 
             <CSSTransition

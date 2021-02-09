@@ -9,7 +9,7 @@ import {
     getAllContacts,
     setLoading,
     setError,
-} from '../actions/contactsActions';
+} from './contactsActions';
 
 const initialState = {
     contacts: [],

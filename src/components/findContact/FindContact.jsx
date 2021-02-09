@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Find.module.css';
 // import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilter } from '../../redux/actions/contactsActions';
+import { setFilter } from '../../redux/contacts/contactsActions';
 
 const FindContact = () => {
     const filter = useSelector(state => state.reducerContacts.filter);

@@ -6,7 +6,7 @@ import {
     getAllContacts,
     deleteContact,
     editContact,
-} from '../actions/contactsActions';
+} from './contactsActions';
 
 const addNewContactOperations = contacts => async (dispatch, getState) => {
     dispatch(setLoading());
