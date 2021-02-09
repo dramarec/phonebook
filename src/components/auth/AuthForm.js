@@ -50,7 +50,7 @@ class AuthForm extends Component {
                     Password
                     <input
                         className={styles.input}
-                        type="password"
+                        type="text"
                         name="password"
                         value={password}
                         onChange={this.onHadleChange}

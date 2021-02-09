@@ -1,11 +1,13 @@
 import React from 'react';
 import LoginForm from '../../components/login/LoginForm';
+import Container from '../../components/layout/container/Container';
+
 const LoginPage = () => {
     return (
-        <div>
+        <Container>
             <h2>Login</h2>
             <LoginForm />
-        </div>
+        </Container>
     );
 };
 

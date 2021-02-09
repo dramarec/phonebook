@@ -1,12 +1,13 @@
 import React from 'react';
 import AuthForm from '../../components/auth/AuthForm';
+import Container from '../../components/layout/container/Container';
 
 const RegistrationPage = () => {
     return (
-        <div>
+        <Container>
             <h2>Registration</h2>
             <AuthForm />
-        </div>
+        </Container>
     );
 };
 
