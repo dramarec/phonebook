@@ -1,0 +1,21 @@
+.list {
+    display: flex;
+    justify-content: center;
+}
+
+.listItem {
+    margin-right: 40px;
+    list-style: none;
+    transition: all 200ms linear;
+}
+.listItem:hover {
+    transform: scale(1.1);
+}
+
+/* .link {
+    color: #ccc;
+    text-decoration: dashed;
+}
+.active-link {
+    color: rgba(0, 170, 255, 0.586);
+} */

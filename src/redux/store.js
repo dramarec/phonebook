@@ -1,18 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import reducerContacts from './contacts/contactsReducer';
+import authReducer from './auth/authReducers';
 
 const store = configureStore({
     reducer: reducerContacts,
 });
-
-export default store;
-
-// old
-// import { configureStore } from '@reduxjs/toolkit';
-// import rootReducer from './contacts/rootReducer';
-
 // const store = configureStore({
-//     reducer: rootReducer,
+//     reducer: {
+//         phonebook: reducerContacts,
+//         auth: authReducer,
+//     },
 // });
 
-// export default store;
+export default store;

@@ -10,7 +10,7 @@ html {
 
 body {
     margin: 0;
-    padding: 30px;
+    padding: 0px;
     background-color: #fff;
     color: #212121;
     font-family: 'Lato', sans-serif;
@@ -35,5 +35,17 @@ li {
     list-style-type: disc;
 }
 h1 {
+    color: #3f51b5;
+}
+
+.link {
+    color: #ccc;
+    text-decoration: dashed;
+    transform: scale(1);
+    transition: all 500ms linear;
+    font-weight: bold;
+}
+.active-link {
+    color: rgba(0, 170, 255, 0.586);
     color: #3f51b5;
 }
