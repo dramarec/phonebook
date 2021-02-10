@@ -2,14 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Div = styled.div`
+    display: flex;
+    align-items: center;
     width: 300px;
     height: 80px;
     background-color: tomato;
     position: absolute;
     border-radius: 5px;
-    top: 0;
-    right: 0;
-    opacity: 0.8;
+    top: 90px;
+    right: 190px;
+    opacity: 0.5;
     p {
         font-size: 25px;
         padding: 10px;
@@ -28,6 +30,13 @@ export const Used = () => {
     return (
         <Div>
             <p>IS ALREADY IN USE!</p>
+        </Div>
+    );
+};
+export const NoticeError = () => {
+    return (
+        <Div>
+            <p>SOMETHING WRONG!</p>
         </Div>
     );
 };
