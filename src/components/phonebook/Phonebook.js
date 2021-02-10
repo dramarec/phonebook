@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Empty, Used } from '../natification/Natification';
 
 import Form from '../form/Form';
-// import Header from '../header/Header';
 import Layout from '../layout/Layout';
 import ContactsList from '../contacts/ContactsList';
 import FindContact from '../findContact/FindContact';
@@ -60,12 +59,15 @@ class Phonebook extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    contacts: state.reducerContacts.contacts,
-    showUsedAlert: state.reducerContacts.showUsedAlert,
-    showEmptyAlert: state.reducerContacts.showEmptyAlert,
-    loading: state.reducerContacts.loading,
-});
+const mapStateToProps = state => {
+    console.log('state :', state);
+    return {
+        contacts: state.reducerContacts.reducerContacts.contacts,
+        showUsedAlert: state.reducerContacts.reducerContacts.showUsedAlert,
+        showEmptyAlert: state.reducerContacts.reducerContacts.showEmptyAlert,
+        loading: state.reducerContacts.reducerContacts.loading,
+    };
+};
 
 const mapDispatchToProps = {
     onFetchContacts: contactsOperations.fetchContacts,

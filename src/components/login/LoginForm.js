@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import authOperations from '../../redux/auth/authOperations';
+import Layout from '../layout/Layout';
 import styles from './Login.form.module.css';
 
 class LoginForm extends Component {
@@ -24,7 +25,7 @@ class LoginForm extends Component {
         const { email, password } = this.state;
 
         return (
-            <div>
+            <Layout title="Login">
                 <form onSubmit={this.handleSubmit} style={styles.form}>
                     <label style={styles.label}>
                         Email
@@ -52,7 +53,7 @@ class LoginForm extends Component {
                         Login
                     </button>
                 </form>
-            </div>
+            </Layout>
         );
     }
 }

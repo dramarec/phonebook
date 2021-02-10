@@ -11,20 +11,11 @@ h2 {
     width: 500px;
     border: 1px solid #3f51b5;
     border-radius: 5px;
-    /* background-color: aliceblue; */
-    /* background: white; */
+    transition: all 250ms;
+}
+.container:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
-
-.appear {
-    opacity: 0;
-    transform: translateX(-100%);
-    transform: scale(0.1);
-}
-
-.appearActive {
-    opacity: 1;
-    transform: scale(1);
-    transform: translateX(0);
-    transition: all 500ms linear;
+.container:focus {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }

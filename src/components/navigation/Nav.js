@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { phbookRoutes } from '../../routes/phbookRoutes';
 import Container from '../layout/container/Container';
+import UserMenu from '../UserMenu';
 import styles from './Nav.module.css';
 
 const Navigation = () => {
@@ -23,6 +24,7 @@ const Navigation = () => {
                     ))}
                 </ul>
             </nav>
+            <UserMenu />
         </Container>
     );
 };
