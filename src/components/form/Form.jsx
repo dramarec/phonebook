@@ -14,21 +14,24 @@ const initialState = {
 
 const Form = ({ data = { ...initialState }, isEdit = false, closeForm }) => {
     const [state, setState] = useState({ ...data });
+
+    const [usedAlert, setUsedAlert] = useState(false);
+    const [emptyAlert, setEmptyAlert] = useState(false);
+
     const dispatch = useDispatch();
 
     const setLoading = useSelector(state => state.reducerContacts.loading);
-    const showUsedAlert = useSelector(
-        state => state.reducerContacts.showUsedAlert,
-    );
-    const showEmptyAlert = useSelector(
-        state => state.reducerContacts.showEmptyAlert,
-    );
+
+    const contacts = useSelector(state => state.reducerContacts.contacts);
 
     useEffect(() => {
-        if (showUsedAlert || showEmptyAlert) {
-            setTimeout(() => dispatch(setAlert(), 2500));
+        if (usedAlert) {
+            setTimeout(() => setUsedAlert(false), 2500);
         }
-    });
+        if (emptyAlert) {
+            setTimeout(() => setEmptyAlert(false), 2500);
+        }
+    }, [usedAlert, emptyAlert]);
 
     const handleInputChange = e => {
         const { name, value } = e.target;
@@ -37,6 +40,14 @@ const Form = ({ data = { ...initialState }, isEdit = false, closeForm }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        if (contacts.some(item => item.name === state.name)) {
+            setUsedAlert(true);
+            return;
+        }
+        if (!state.name && !state.contacts) {
+            setEmptyAlert(true);
+            return;
+        }
         if (isEdit) {
             closeForm(false);
             dispatch(editContactOperations(state));
@@ -49,6 +60,8 @@ const Form = ({ data = { ...initialState }, isEdit = false, closeForm }) => {
 
     return (
         <>
+            {usedAlert && <h2>USED!!!</h2>}
+            {emptyAlert && <h2>EMPTY!!!</h2>}
             <form onSubmit={handleSubmit}>
                 <label>
                     Name
@@ -96,98 +109,3 @@ const Form = ({ data = { ...initialState }, isEdit = false, closeForm }) => {
 };
 
 export default Form;
-
-//class
-// import React, { Component } from 'react';
-// import styles from './Form.module.css';
-// import { connect } from 'react-redux';
-// import {
-//     addNewContact,
-//     getAllContacts,
-//     setAlert,
-// } from '../../redux/actions/contactsActions';
-
-// class Form extends Component {
-//     state = {
-//         name: '',
-//         number: '',
-//     };
-
-//     // componentDidMount() {
-//     //     if (localStorage.getItem('contacts')) {
-//     //         this.props.getAllContacts(
-//     //             JSON.parse(localStorage.getItem('contacts')),
-//     //         );
-//     //     }
-//     // }
-
-//     componentDidUpdate() {
-//         if (this.props.showUsedAlert || this.props.showEmptyAlert) {
-//             setTimeout(() => this.props.setAlert(), 2500);
-//         }
-//     }
-
-//     handleInputChange = e => {
-//         this.setState({
-//             [e.target.name]: e.target.value,
-//         });
-//     };
-
-//     handleSubmit = e => {
-//         e.preventDefault();
-//         this.props.onAddContact({
-//             name: this.state.name,
-//             number: this.state.number,
-//         });
-//         this.setState({
-//             name: '',
-//             number: '',
-//         });
-//     };
-
-//     render() {
-//         return (
-//             <form onSubmit={this.handleSubmit}>
-//                 <label>
-//                     Name
-//                     <input
-//                         type="text"
-//                         name="name"
-//                         className={styles.input}
-//                         placeholder="Name"
-//                         value={this.state.name}
-//                         onChange={this.handleInputChange}
-//                     />
-//                 </label>
-
-//                 <label>
-//                     Number
-//                     <input
-//                         type="text"
-//                         name="number"
-//                         className={styles.input}
-//                         placeholder="Number"
-//                         value={this.state.number}
-//                         onChange={this.handleInputChange}
-//                     />
-//                 </label>
-
-//                 <button className={styles.button} type="submit">
-//                     Add contact
-//                 </button>
-//             </form>
-//         );
-//     }
-// }
-
-// const mapStateToProps = state => ({
-//     showUsedAlert: state.reducerContacts.showUsedAlert,
-//     showEmptyAlert: state.reducerContacts.showEmptyAlert,
-// });
-
-// const mapDispatchToProps = {
-//     onAddContact: addNewContact,
-//     setAlert,
-//     getAllContacts,
-// };
-// export default connect(mapStateToProps, mapDispatchToProps)(Form);
