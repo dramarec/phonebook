@@ -7,7 +7,7 @@ const editContact = createAction('@contact/editContact');
 const setFilter = createAction('@contact/setFilter');
 const setAlert = createAction('@contact/setAlert,');
 const setLoading = createAction('@contact/setLoading');
-const setError = createAction('@contact/setLError');
+const setError = createAction('@contact/setError');
 
 export {
     addNewContact,

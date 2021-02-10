@@ -1,25 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Auth.form.module.css';
 import Layout from '../layout/Layout';
 import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     signInOperations,
     signUpOperations,
 } from '../../redux/auth/authOperations';
+import { NoticeError } from '../natification/Natification';
+import { setError } from '../../redux/auth/authActions';
 
 const initialState = {
+    name: '',
     email: '',
     password: '',
 };
-
 const AuthForm = () => {
     const dispatch = useDispatch();
     const location = useLocation();
-    // console.log('location :', location);
 
     const [state, setState] = useState({ ...initialState });
+    const error = useSelector(state => state.auth.error);
 
+    useEffect(() => {
+        setTimeout(() => {
+            dispatch(setError(''));
+        }, 2500);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [error]);
     const onHadleChange = e => {
         const { name, value } = e.target;
         setState(prev => ({ ...prev, [name]: value }));
@@ -38,7 +46,23 @@ const AuthForm = () => {
                 location.pathname === '/signup' ? 'Registration' : 'Login In'
             }
         >
+            {error && <NoticeError />}
+
             <form onSubmit={onHandleSubmit}>
+                {location.pathname === '/signup' && (
+                    <label>
+                        Name
+                        <input
+                            className={styles.input}
+                            type="text"
+                            value={state.name}
+                            name="name"
+                            onChange={onHadleChange}
+                            placeholder="Name"
+                        />
+                    </label>
+                )}
+
                 <label>
                     Email
                     <input

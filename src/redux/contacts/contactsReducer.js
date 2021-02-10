@@ -17,7 +17,7 @@ const initialState = {
     showEmptyAlert: false,
     showUsedAlert: false,
     loading: false,
-    setError: '',
+    error: '',
 };
 
 const contactsReducer = createReducer(
@@ -67,9 +67,9 @@ const contactsReducer = createReducer(
             ...state,
             loading: !state.loading,
         }),
-        [setError]: state => ({
+        [setError]: (state, action) => ({
             ...state,
-            setError: state.payload,
+            error: action.payload,
         }),
     },
 );

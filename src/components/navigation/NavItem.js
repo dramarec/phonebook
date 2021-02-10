@@ -5,7 +5,7 @@ import styles from './Nav.module.css';
 const NavItem = ({ isAuth, path, name, exact, isPrivate, restricted }) => {
     return (
         <>
-            {!isAuth && !isPrivate && !restricted && (
+            {!isPrivate && !restricted && (
                 <li className={styles.listItem} key={path}>
                     <NavLink
                         to={path}

@@ -2,8 +2,13 @@ import React from 'react';
 import style from './Container.module.css';
 import PropTypes from 'prop-types';
 
-const Container = ({ children }) => {
-    return <div className={style.container}>{children}</div>;
+const Container = ({ children, title }) => {
+    return (
+        <div className={style.container}>
+            {title && <h2>{title}</h2>}
+            {children}
+        </div>
+    );
 };
 
 export default Container;

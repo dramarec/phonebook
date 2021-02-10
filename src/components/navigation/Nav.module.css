@@ -1,7 +1,7 @@
 .navbar {
     display: inline-block;
-    position: relative;
-    left: 10%;
+    /* position: relative; */
+    /* left: 10%; */
 }
 .list {
     display: flex;
@@ -26,9 +26,9 @@
     padding: 0 4px;
     cursor: pointer;
     transition: transform 200ms linear;
-    position: absolute;
+    /* position: absolute;
     right: 25%;
-    margin-left: auto;
+    margin-left: auto; */
 }
 .button:hover {
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.3);

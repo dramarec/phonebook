@@ -1,20 +1,40 @@
-import { SIGNUP, SIGNIN, SIGNOUT, SETERROR, SETLOADING } from './authConstants';
+import {
+    SIGNUP,
+    SIGNIN,
+    SIGNOUT,
+    SETERROR,
+    SETLOADING,
+    SETNAME,
+    GETNAME,
+} from './authConstants';
 
 const initialState = {
+    name: [],
     email: '',
     idToken: '',
+    localId: '',
     refreshToken: '',
     isAuth: false,
     isLoading: false,
-    localId: '',
     error: '',
 };
 
 const authReducer = (state = { ...initialState }, { type, payload }) => {
     switch (type) {
+        case GETNAME:
+            return {
+                ...state,
+                name: payload.name,
+            };
+        case SETNAME:
+            return {
+                ...state,
+                name: payload.name,
+            };
         case SIGNUP:
             return {
                 ...state,
+                name: payload.name,
                 email: payload.email,
                 idToken: payload.idToken,
                 refreshToken: payload.refreshToken,
@@ -24,6 +44,7 @@ const authReducer = (state = { ...initialState }, { type, payload }) => {
         case SIGNIN:
             return {
                 ...state,
+                name: payload.name,
                 email: payload.email,
                 idToken: payload.idToken,
                 refreshToken: payload.refreshToken,
@@ -32,10 +53,10 @@ const authReducer = (state = { ...initialState }, { type, payload }) => {
             };
         case SIGNOUT:
             return { ...initialState };
-        case SETERROR:
-            return { ...state, isLoading: !state.isLoading };
         case SETLOADING:
-            return { ...state, arror: payload };
+            return { ...state, isLoading: !state.isLoading };
+        case SETERROR:
+            return { ...state, error: payload };
 
         default:
             return state;

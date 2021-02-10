@@ -1,10 +1,14 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 
-const PablickRotes = ({ path, exact, component, isAuth }) => {
+const PablickRotes = ({ path, exact, component, isAuth, restricted }) => {
     return (
         <>
-            <Route path={path} exact={exact} component={component} />
+            {isAuth && restricted ? (
+                <Redirect to="/contacts" />
+            ) : (
+                <Route path={path} exact={exact} component={component} />
+            )}
         </>
     );
 };

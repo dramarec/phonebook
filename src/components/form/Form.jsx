@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Form.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { setAlert } from '../../redux/contacts/contactsActions';
 import {
     addNewContactOperations,
     editContactOperations,
 } from '../../redux/contacts/contactsOperations';
+import { setError } from '../../redux/contacts/contactsActions';
+import { NoticeError, Used, Empty } from '../natification/Natification';
 
 const initialState = {
     name: '',
@@ -14,15 +15,15 @@ const initialState = {
 
 const Form = ({ data = { ...initialState }, isEdit = false, closeForm }) => {
     const [state, setState] = useState({ ...data });
-
     const [usedAlert, setUsedAlert] = useState(false);
     const [emptyAlert, setEmptyAlert] = useState(false);
+    // const [error, setError] = useState(false);
 
     const dispatch = useDispatch();
 
     const setLoading = useSelector(state => state.reducerContacts.loading);
-
     const contacts = useSelector(state => state.reducerContacts.contacts);
+    const error = useSelector(state => state.reducerContacts.error);
 
     useEffect(() => {
         if (usedAlert) {
@@ -31,7 +32,11 @@ const Form = ({ data = { ...initialState }, isEdit = false, closeForm }) => {
         if (emptyAlert) {
             setTimeout(() => setEmptyAlert(false), 2500);
         }
-    }, [usedAlert, emptyAlert]);
+        setTimeout(() => {
+            dispatch(setError(''));
+        }, 2500);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [usedAlert, emptyAlert, error]);
 
     const handleInputChange = e => {
         const { name, value } = e.target;
@@ -60,8 +65,12 @@ const Form = ({ data = { ...initialState }, isEdit = false, closeForm }) => {
 
     return (
         <>
-            {usedAlert && <h2>USED!!!</h2>}
-            {emptyAlert && <h2>EMPTY!!!</h2>}
+            {error && <NoticeError />}
+            {/* {error && <h2>!!!!!Error!!!!!</h2>} */}
+            {/* {usedAlert && <h2>USED!!!</h2>} */}
+            {usedAlert && <Used />}
+            {/* {emptyAlert && <h2>EMPTY!!!</h2>} */}
+            {emptyAlert && <Empty />}
             <form onSubmit={handleSubmit}>
                 <label>
                     Name
@@ -94,6 +103,7 @@ const Form = ({ data = { ...initialState }, isEdit = false, closeForm }) => {
                         {isEdit ? 'Edit Contact' : ' Add contact'}
                     </button>
                 )}
+
                 {isEdit && (
                     <button
                         className={styles.button}

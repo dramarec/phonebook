@@ -1,9 +1,23 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { persistStore } from 'redux-persist';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import {
+    persistStore,
+    // persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist';
 import rootReducer from './rootReducer';
 
 const store = configureStore({
     reducer: rootReducer,
+    middleware: getDefaultMiddleware({
+        serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+    }),
 });
 export const persistor = persistStore(store);
 
@@ -20,25 +34,19 @@ export default store;
 //========================
 // {
 //     "rules": {
-//         "tutors": {
-//         ".read": true,
-//          ".write": true
+//         "contacts": {
+//         "$uid": {
+//           ".read": "$uid === auth.uid",
+//          ".write": "$uid === auth.uid"
+//         }
 //         },
-//         "students": {
-//          ".read": true,
-//         ".write": true
-//         },
-//         "myOwnFolder": {
+//         "users": {
 //          "$uid": {
 //           ".read": "$uid === auth.uid",
 //          ".write": "$uid === auth.uid"
 //         }
 //         },
-//     "users": {
-//      "$user_id": {
-//      ".write": "auth !== null && auth.user_id === 'yuY4zi24JadojY4Y6JwlKHUwnof2'"
-//     }
-//     }
+
 //     }
 // }
 //=========

@@ -10,15 +10,20 @@ import Layout from '../layout/Layout';
 import ContactsList from '../contacts/ContactsList';
 import FindContact from '../findContact/FindContact';
 import { getContactOperations } from '../../redux/contacts/contactsOperations';
+// import { setError } from '../../redux/contacts/contactsActions';
 
 const Phonebook = () => {
     const dispatch = useDispatch();
     const isAuth = useSelector(state => state.auth.isAuth);
+    const error = useSelector(state => state.reducerContacts.error);
 
     useEffect(() => {
         if (isAuth) {
             dispatch(getContactOperations());
         }
+        // if (error) {
+        //     dispatch(setError(''));
+        // }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -46,8 +51,9 @@ const Phonebook = () => {
                     <ContactsList />
                 </Layout>
             )}
+            {error && <Layout title="Something Wrong :(" />}
 
-            {contacts.length > 0 || (
+            {(!error && contacts.length > 0) || (
                 <Layout title="Phonebook is empty. Please add contact" />
             )}
 

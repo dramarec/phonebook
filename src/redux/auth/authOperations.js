@@ -1,17 +1,35 @@
 import axios from 'axios';
-import { setError, setLoading, signUp } from './authActions';
+import {
+    setError,
+    setLoading,
+    signUp,
+    addUserName,
+    getUserName,
+    signOut,
+} from './authActions';
 
 const signUpOperations = user => async dispatch => {
+    // const idToken = getState();
     dispatch(setLoading());
     try {
         const response = await axios.post(process.env.REACT_APP_SIGNUP_URL, {
             ...user,
             returnSecureToken: true,
         });
-        console.log('response :', response);
+        // console.log('response :', response);
+
+        // eslint-disable-next-line no-unused-vars
+        const userResponse = await axios.post(
+            `${process.env.REACT_APP_BASE_URL}/users/${response.data.localId}.json?auth=${response.data.idToken}`,
+            { name: user.name },
+        );
+        console.log('userResponse :', userResponse);
+        dispatch(addUserName(user.name));
+
         dispatch(signUp(response.data));
     } catch (error) {
         dispatch(setError(error));
+        dispatch(signOut());
     } finally {
         dispatch(setLoading());
     }
@@ -23,7 +41,19 @@ const signInOperations = user => async dispatch => {
             ...user,
             returnSecureToken: true,
         });
-        console.log('response :', response);
+        // console.log('response :', response);
+
+        // eslint-disable-next-line no-unused-vars
+        const userResponseName = await axios.get(
+            `${process.env.REACT_APP_BASE_URL}/users/${response.data.localId}.json?auth=${response.data.idToken}`,
+            { name: user.name },
+        );
+        console.log('userResponseName :', userResponseName.data);
+
+        const userName = Object.values(userResponseName.data);
+        console.log('userName :', userName);
+        dispatch(getUserName(userName));
+
         dispatch(signUp(response.data));
     } catch (error) {
         dispatch(setError(error));

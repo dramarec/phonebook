@@ -6,6 +6,7 @@ import { phbookRoutes } from '../../routes/phbookRoutes';
 import Container from '../layout/container/Container';
 import styles from './Nav.module.css';
 import NavItem from './NavItem';
+import UserMenu from '../userMenu/UserMenu';
 
 const Navigation = () => {
     const isAuth = useSelector(state => state.auth.isAuth);
@@ -23,9 +24,12 @@ const Navigation = () => {
                     ))}
                 </ul>
             </nav>
-            <button className={styles.button} onClick={onHandleClick}>
-                Logout
-            </button>
+            <UserMenu />
+            {isAuth && (
+                <button className={styles.button} onClick={onHandleClick}>
+                    Logout
+                </button>
+            )}
         </Container>
     );
 };
