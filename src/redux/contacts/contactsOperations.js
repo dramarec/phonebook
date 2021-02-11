@@ -15,12 +15,12 @@ const addNewContactOperations = contacts => async (dispatch, getState) => {
     // axios.defaults.headers.common['Authorization'] = idToken;
     try {
         const response = await axios.post(
-            `${process.env.REACT_APP_BASE_URL}/contacts/${userId}.json?auth${idToken}`,
+            `${process.env.REACT_APP_BASE_URL}/contacts/${userId}.json?auth=${idToken}`,
             contacts,
         );
         dispatch(addNewContact({ ...contacts, id: response.data.name }));
     } catch (error) {
-        dispatch(setError('addNewContactOperations something went wrong'));
+        dispatch(setError('addNewContactOperations error'));
     } finally {
         dispatch(setLoading());
     }
@@ -32,19 +32,19 @@ const getContactOperations = () => async (dispatch, getState) => {
     dispatch(setLoading());
     try {
         const response = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/contacts/${userId}.json?auth${idToken}`,
+            `${process.env.REACT_APP_BASE_URL}/contacts/${userId}.json?auth=${idToken}`,
         );
         console.log('response contacts:', response.data);
 
         const contacts = Object.keys(response.data).map(key => ({
             ...response.data[key],
-            // id: key,
+            id: key,
         }));
         console.log('contacts :', contacts);
         // console.log('response :', response);
         dispatch(getAllContacts(contacts));
     } catch (error) {
-        dispatch(setError('getContactOperations something went wrong'));
+        dispatch(setError('getContactOperations error'));
     } finally {
         dispatch(setLoading());
     }

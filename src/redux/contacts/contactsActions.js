@@ -8,6 +8,7 @@ const setFilter = createAction('@contact/setFilter');
 const setAlert = createAction('@contact/setAlert,');
 const setLoading = createAction('@contact/setLoading');
 const setError = createAction('@contact/setError');
+const signOutAction = createAction('@contact/signOutAction');
 
 export {
     addNewContact,
@@ -18,4 +19,5 @@ export {
     getAllContacts,
     setLoading,
     setError,
+    signOutAction,
 };

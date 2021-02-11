@@ -9,9 +9,11 @@
 }
 
 .listItem {
-    margin-right: 40px;
     list-style: none;
     transition: all 200ms linear;
+}
+.listItem:not(:last-child) {
+    margin-right: 40px;
 }
 .listItem:hover {
     transform: scale(1.1);

@@ -9,6 +9,7 @@ import {
     getAllContacts,
     setLoading,
     setError,
+    signOutAction,
 } from './contactsActions';
 
 const initialState = {
@@ -70,6 +71,9 @@ const contactsReducer = createReducer(
         [setError]: (state, action) => ({
             ...state,
             error: action.payload,
+        }),
+        [signOutAction]: (state, action) => ({
+            ...initialState,
         }),
     },
 );

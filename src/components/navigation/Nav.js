@@ -7,6 +7,7 @@ import Container from '../layout/container/Container';
 import styles from './Nav.module.css';
 import NavItem from './NavItem';
 import UserMenu from '../userMenu/UserMenu';
+import { signOutAction } from '../../redux/contacts/contactsActions';
 
 const Navigation = () => {
     const isAuth = useSelector(state => state.auth.isAuth);
@@ -14,6 +15,7 @@ const Navigation = () => {
     const dispatch = useDispatch();
     const onHandleClick = () => {
         dispatch(signOut());
+        dispatch(signOutAction());
     };
     return (
         <Container>

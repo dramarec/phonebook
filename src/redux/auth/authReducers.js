@@ -9,7 +9,7 @@ import {
 } from './authConstants';
 
 const initialState = {
-    name: [],
+    name: '',
     email: '',
     idToken: '',
     localId: '',
@@ -24,12 +24,14 @@ const authReducer = (state = { ...initialState }, { type, payload }) => {
         case GETNAME:
             return {
                 ...state,
-                name: payload.name,
+                // name: payload.name,
+                name: type.name,
             };
         case SETNAME:
             return {
                 ...state,
-                name: payload.name,
+                // name: payload.name,
+                name: type.name,
             };
         case SIGNUP:
             return {

@@ -1,9 +1,6 @@
 .header {
-    /* text-align: center; */
-    border-bottom: 1px solid #ccc;
-    /* position: absolute; */
+    /* border-bottom: 1px solid #ccc; */
     width: 100%;
     display: flex;
-
-    /* box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); */
+    background-color: rgb(148, 148, 255);
 }

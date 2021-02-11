@@ -3,9 +3,9 @@ import {
     setError,
     setLoading,
     signUp,
-    addUserName,
     getUserName,
     signOut,
+    signIn,
 } from './authActions';
 
 const signUpOperations = user => async dispatch => {
@@ -19,14 +19,15 @@ const signUpOperations = user => async dispatch => {
         // console.log('response :', response);
 
         // eslint-disable-next-line no-unused-vars
-        const userResponse = await axios.post(
+        const userResponseName = await axios.get(
             `${process.env.REACT_APP_BASE_URL}/users/${response.data.localId}.json?auth=${response.data.idToken}`,
-            { name: user.name },
         );
-        console.log('userResponse :', userResponse);
-        dispatch(addUserName(user.name));
+        const userName = Object.keys(userResponseName.data).map(key => ({
+            ...userResponseName.data[key],
+        }))[0].name;
+        // dispatch(getUserName(userName));
 
-        dispatch(signUp(response.data));
+        dispatch(signUp({ ...response.data, name: userName }));
     } catch (error) {
         dispatch(setError(error));
         dispatch(signOut());
@@ -46,15 +47,16 @@ const signInOperations = user => async dispatch => {
         // eslint-disable-next-line no-unused-vars
         const userResponseName = await axios.get(
             `${process.env.REACT_APP_BASE_URL}/users/${response.data.localId}.json?auth=${response.data.idToken}`,
-            { name: user.name },
         );
-        console.log('userResponseName :', userResponseName.data);
+        const userName = Object.keys(userResponseName.data).map(key => ({
+            ...userResponseName.data[key],
+        }))[0].name;
 
-        const userName = Object.values(userResponseName.data);
-        console.log('userName :', userName);
+        // const userName = Object.values(userResponseName.data);
+        // console.log('userName :', userName);
         dispatch(getUserName(userName));
 
-        dispatch(signUp(response.data));
+        dispatch(signIn({ ...response.data, name: userName }));
     } catch (error) {
         dispatch(setError(error));
     } finally {

@@ -27,6 +27,7 @@ const UserMenu = () => {
     // const [state, setState] = useState({ ...initialState });
     const isAuth = useSelector(state => state.auth.isAuth);
     const name = useSelector(state => state.auth.name);
+    // console.log('name :', name);
 
     return (
         <>
@@ -38,7 +39,7 @@ const UserMenu = () => {
                         width="32"
                         style={styles.avatar}
                     /> */}
-                    <span style={styles.name}>Welcome, {name}</span>
+                    <span style={styles.name}>Welcome {name}</span>
                     {/* <button type="button" onClick={signOut}>
                 Logout
             </button> */}
