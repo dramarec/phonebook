@@ -1,8 +1,15 @@
-.navbar {
-    display: inline-block;
-    /* position: relative; */
-    /* left: 10%; */
+.container__navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: 1px solid rgb(255, 0, 0);
+    max-width: 600px;
+    padding: 5px 25px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
+
 .list {
     display: flex;
     justify-content: center;
@@ -11,7 +18,9 @@
 .listItem {
     list-style: none;
     transition: all 200ms linear;
+    padding: 10px 0;
 }
+
 .listItem:not(:last-child) {
     margin-right: 40px;
 }
@@ -28,9 +37,6 @@
     padding: 0 4px;
     cursor: pointer;
     transition: transform 200ms linear;
-    /* position: absolute;
-    right: 25%;
-    margin-left: auto; */
 }
 .button:hover {
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.3);
@@ -38,7 +44,6 @@
 }
 
 .button:focus {
-    /* background-color: aliceblue; */
     color: black;
     box-shadow: 0 -1px -5px 0 rgba(0, 0, 0, 0.3);
 }

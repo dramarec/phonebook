@@ -9,25 +9,23 @@ import {
 } from './authActions';
 
 const signUpOperations = user => async dispatch => {
-    // const idToken = getState();
     dispatch(setLoading());
     try {
         const response = await axios.post(process.env.REACT_APP_SIGNUP_URL, {
             ...user,
             returnSecureToken: true,
         });
-        // console.log('response :', response);
-
-        // eslint-disable-next-line no-unused-vars
-        const userResponseName = await axios.get(
+        // eslint-disable-next-line
+        const userResponseName = await axios.post(
             `${process.env.REACT_APP_BASE_URL}/users/${response.data.localId}.json?auth=${response.data.idToken}`,
+            { name: user.name },
         );
-        const userName = Object.keys(userResponseName.data).map(key => ({
-            ...userResponseName.data[key],
-        }))[0].name;
-        // dispatch(getUserName(userName));
-
-        dispatch(signUp({ ...response.data, name: userName }));
+        // console.log('userResponseName :', userResponseName);
+        // const userName = Object.keys(userResponseName.data).map(key => ({
+        //     ...userResponseName.data[key],
+        // }))[0].name;
+        // console.log(user.name);
+        dispatch(signUp({ ...response.data, name: user.name }));
     } catch (error) {
         dispatch(setError(error));
         dispatch(signOut());
@@ -42,9 +40,7 @@ const signInOperations = user => async dispatch => {
             ...user,
             returnSecureToken: true,
         });
-        // console.log('response :', response);
 
-        // eslint-disable-next-line no-unused-vars
         const userResponseName = await axios.get(
             `${process.env.REACT_APP_BASE_URL}/users/${response.data.localId}.json?auth=${response.data.idToken}`,
         );
@@ -52,8 +48,6 @@ const signInOperations = user => async dispatch => {
             ...userResponseName.data[key],
         }))[0].name;
 
-        // const userName = Object.values(userResponseName.data);
-        // console.log('userName :', userName);
         dispatch(getUserName(userName));
 
         dispatch(signIn({ ...response.data, name: userName }));
@@ -65,147 +59,3 @@ const signInOperations = user => async dispatch => {
 };
 
 export { signUpOperations, signInOperations };
-
-// const register = credentials => dispatch => {
-//     dispatch(registerRequest());
-
-//     axios
-//         .post('/users/signup', credentials)
-//         // .post('data.json', credentials)
-//         .then(response => {
-//             // console.log('response :', response);
-//             // token.set(response.data.token);
-//             dispatch(registerSuccess(response.data));
-//         })
-//         .catch(error => dispatch(registerError(error)));
-// };
-
-// const logIn = credentials => dispatch => {
-//     dispatch(loginRequest());
-
-//     axios
-//         .post('/users/login', credentials)
-//         .then(response => {
-//             token.set(response.data.token);
-//             dispatch(loginSuccess(response.data));
-//         })
-//         .catch(error => dispatch(loginError(error)));
-// };
-
-// const getCurrentUser = () => (dispatch, getState) => {
-//     const {
-//         auth: { token: persistedToken },
-//     } = getState();
-
-//     if (!persistedToken) {
-//         return;
-//     }
-
-//     token.set(persistedToken);
-//     dispatch(getCurrentUserRequest());
-
-//     axios
-//         .get('/users/current')
-//         .then(({ data }) => dispatch(getCurrentUserSuccess(data)))
-//         .catch(error => getCurrentUserError(error));
-// };
-
-// const logOut = () => dispatch => {
-//     dispatch(logoutRequest());
-
-//     axios
-//         .post('/users/logout')
-//         .then(() => {
-//             token.unset();
-//             dispatch(logoutSuccess());
-//         })
-//         .catch(error => dispatch(logoutError(error)));
-// };
-
-//==================================
-// import axios from 'axios';
-// import {
-//     registerRequest,
-//     registerSuccess,
-//     registerError,
-//     logoutRequest,
-//     logoutSuccess,
-//     logoutError,
-//     loginRequest,
-//     loginSuccess,
-//     loginError,
-//     getCurrentUserRequest,
-//     getCurrentUserSuccess,
-//     getCurrentUserError,
-// } from './authActions';
-
-// // axios.defaults.baseURL = 'https://lect-98814-default-rtdb.firebaseio.com/';
-// axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
-
-// const token = {
-//     set(token) {
-//         axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//     },
-//     unset() {
-//         axios.defaults.headers.common.Authorization = '';
-//     },
-// };
-
-// const register = credentials => dispatch => {
-//     dispatch(registerRequest());
-
-//     axios
-//         .post('/users/signup', credentials)
-//         // .post('data.json', credentials)
-//         .then(response => {
-//             // console.log('response :', response);
-//             // token.set(response.data.token);
-//             dispatch(registerSuccess(response.data));
-//         })
-//         .catch(error => dispatch(registerError(error)));
-// };
-
-// const logIn = credentials => dispatch => {
-//     dispatch(loginRequest());
-
-//     axios
-//         .post('/users/login', credentials)
-//         .then(response => {
-//             token.set(response.data.token);
-//             dispatch(loginSuccess(response.data));
-//         })
-//         .catch(error => dispatch(loginError(error)));
-// };
-
-// const getCurrentUser = () => (dispatch, getState) => {
-//     const {
-//         auth: { token: persistedToken },
-//     } = getState();
-
-//     if (!persistedToken) {
-//         return;
-//     }
-
-//     token.set(persistedToken);
-//     dispatch(getCurrentUserRequest());
-
-//     axios
-//         .get('/users/current')
-//         .then(({ data }) => dispatch(getCurrentUserSuccess(data)))
-//         .catch(error => getCurrentUserError(error));
-// };
-
-// const logOut = () => dispatch => {
-//     dispatch(logoutRequest());
-
-//     axios
-//         .post('/users/logout')
-//         .then(() => {
-//             token.unset();
-//             dispatch(logoutSuccess());
-//         })
-//         .catch(error => dispatch(logoutError(error)));
-// };
-
-// // eslint-disable-next-line import/no-anonymous-default-export
-// export default { register, logOut, logIn, getCurrentUser };

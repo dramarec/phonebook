@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import ContactsItem from './contactsItem/ContactsItem';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import styles from './Contacts.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContactOperations } from '../../redux/contacts/contactsOperations';
-import Form from '../form/Form';
+import FormContacts from '../formContacts/FormContacts';
 
 const ContactsList = () => {
     const [isEditeFormOpen, setEditFormOpen] = useState(false);
@@ -33,7 +32,11 @@ const ContactsList = () => {
     return (
         <>
             {isEditeFormOpen && (
-                <Form data={data} isEdit={true} closeForm={setEditFormOpen} />
+                <FormContacts
+                    data={data}
+                    isEdit={true}
+                    closeForm={setEditFormOpen}
+                />
             )}
             <TransitionGroup component="ul" className={styles.ul}>
                 {contacts.map(({ name, number, id }) => (
@@ -54,8 +57,3 @@ const ContactsList = () => {
 };
 
 export default ContactsList;
-
-ContactsList.propTypes = {
-    contacts: PropTypes.arrayOf(PropTypes.object.isRequired),
-    // deleteContact: PropTypes.func.isRequired,
-};

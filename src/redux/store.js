@@ -1,7 +1,6 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import {
     persistStore,
-    // persistReducer,
     FLUSH,
     REHYDRATE,
     PAUSE,
@@ -22,15 +21,7 @@ const store = configureStore({
 export const persistor = persistStore(store);
 
 export default store;
-// console.log('persistor :', persistor);
-//----------------------
-// import { createStore } from 'redux';
-// import { composeWithDevTools } from 'redux-devtools-extension';
-// import rootReducer from './reducers/rootReducer';
 
-// const store = createStore(rootReducer, composeWithDevTools());
-
-// export default store;
 //========================
 // {
 //     "rules": {
@@ -56,3 +47,4 @@ export default store;
 //       ".write": "now < 1614981600000",  // 2021-3-6
 //     }
 //   }
+// {

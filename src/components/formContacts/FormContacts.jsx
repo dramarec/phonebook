@@ -13,11 +13,14 @@ const initialState = {
     number: '',
 };
 
-const Form = ({ data = { ...initialState }, isEdit = false, closeForm }) => {
+const FormContacts = ({
+    data = { ...initialState },
+    isEdit = false,
+    closeForm,
+}) => {
     const [state, setState] = useState({ ...data });
     const [usedAlert, setUsedAlert] = useState(false);
     const [emptyAlert, setEmptyAlert] = useState(false);
-    // const [error, setError] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -66,10 +69,9 @@ const Form = ({ data = { ...initialState }, isEdit = false, closeForm }) => {
     return (
         <>
             {error && <NoticeError />}
-            {/* {error && <h2>!!!!!Error!!!!!</h2>} */}
-            {/* {usedAlert && <h2>USED!!!</h2>} */}
+
             {usedAlert && <Used />}
-            {/* {emptyAlert && <h2>EMPTY!!!</h2>} */}
+
             {emptyAlert && <Empty />}
             <form onSubmit={handleSubmit}>
                 <label>
@@ -118,4 +120,4 @@ const Form = ({ data = { ...initialState }, isEdit = false, closeForm }) => {
     );
 };
 
-export default Form;
+export default FormContacts;

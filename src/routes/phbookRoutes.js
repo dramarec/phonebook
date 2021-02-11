@@ -47,42 +47,4 @@ export const phbookRoutes = [
         isPrivate: true,
         restricted: false,
     },
-    // {
-    //     path: '/home',
-    //     name: 'Home',
-    //     exact: true,
-    //     component: lazy(() =>
-    //         import('../pages/home/HomePage' /* webpackChunkName: "Home" */),
-    //     ),
-    // },
-    // {
-    //     path: '/register',
-    //     name: 'Register',
-    //     exact: true,
-    //     component: lazy(() =>
-    //         import(
-    //             '../components/auth/AuthForm' /* webpackChunkName: "Register" */
-    //         ),
-    //     ),
-    // },
-    // {
-    //     path: '/login',
-    //     name: 'Login',
-    //     exact: true,
-    //     component: lazy(() =>
-    //         import(
-    //             '../components/login/LoginForm' /* webpackChunkName: "Login" */
-    //         ),
-    //     ),
-    // },
-    // {
-    //     path: '/contacts',
-    //     name: 'Contacts',
-    //     exact: true,
-    //     component: lazy(() =>
-    //         import(
-    //             '../components/phonebook/Phonebook' /* webpackChunkName: "Contacts" */
-    //         ),
-    //     ),
-    // },
 ];

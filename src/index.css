@@ -16,6 +16,7 @@ body {
     font-family: 'Lato', sans-serif;
     margin-right: auto;
     margin-left: auto;
+    height: 100%;
 }
 
 img {
@@ -41,9 +42,10 @@ h1 {
 .link {
     color: #ccc;
     text-decoration: dashed;
-    transform: scale(1);
+    /* transform: scale(1); */
     transition: all 500ms linear;
     font-weight: bold;
+    padding: 10px 0;
 }
 .active-link {
     color: rgba(0, 170, 255, 0.586);

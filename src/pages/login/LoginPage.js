@@ -1,6 +1,5 @@
 import React from 'react';
-// import LoginForm from '../../components/login/LoginForm';
-import AuthForm from '../../components/auth/AuthForm';
+import AuthForm from '../../components/formAuth/AuthForm';
 import Container from '../../components/layout/container/Container';
 
 const LoginPage = () => {

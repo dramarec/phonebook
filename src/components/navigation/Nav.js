@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { signOut } from '../../redux/auth/authActions';
 import { phbookRoutes } from '../../routes/phbookRoutes';
-import Container from '../layout/container/Container';
+// import Container from '../layout/container/Container';
 import styles from './Nav.module.css';
 import NavItem from './NavItem';
 import UserMenu from '../userMenu/UserMenu';
@@ -18,7 +18,7 @@ const Navigation = () => {
         dispatch(signOutAction());
     };
     return (
-        <Container>
+        <div className={styles.container__navbar}>
             <nav className={styles.navbar}>
                 <ul className={styles.list}>
                     {phbookRoutes.map(route => (
@@ -32,7 +32,7 @@ const Navigation = () => {
                     Logout
                 </button>
             )}
-        </Container>
+        </div>
     );
 };
 

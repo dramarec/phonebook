@@ -1,6 +1,4 @@
 .header {
-    /* border-bottom: 1px solid #ccc; */
-    width: 100%;
-    display: flex;
     background-color: rgb(148, 148, 255);
+    height: 50px;
 }
