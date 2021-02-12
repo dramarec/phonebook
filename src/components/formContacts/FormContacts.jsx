@@ -48,7 +48,7 @@ const FormContacts = ({
 
     const handleSubmit = e => {
         e.preventDefault();
-        if (contacts.some(item => item.name === state.name)) {
+        if (contacts.some(item => item.name === state.name) && !isEdit) {
             setUsedAlert(true);
             return;
         }
