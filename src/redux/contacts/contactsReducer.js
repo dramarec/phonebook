@@ -1,16 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-
-import {
-    addNewContact,
-    deleteContact,
-    editContact,
-    setFilter,
-    setAlert,
-    getAllContacts,
-    setLoading,
-    setError,
-    signOutAction,
-} from './contactsActions';
+import contactsActions from './contactsActions';
 
 const initialState = {
     contacts: [],
@@ -24,19 +13,19 @@ const initialState = {
 const contactsReducer = createReducer(
     { ...initialState },
     {
-        [addNewContact]: (state, action) => {
+        [contactsActions.addNewContact]: (state, action) => {
             return {
                 ...state,
                 contacts: [...state.contacts, action.payload],
             };
         },
 
-        [getAllContacts]: (state, action) => ({
+        [contactsActions.getAllContacts]: (state, action) => ({
             ...state,
             contacts: [...action.payload],
         }),
 
-        [deleteContact]: (state, action) => ({
+        [contactsActions.deleteContact]: (state, action) => ({
             ...state,
             contacts: [
                 ...state.contacts.filter(
@@ -44,7 +33,7 @@ const contactsReducer = createReducer(
                 ),
             ],
         }),
-        [editContact]: (state, action) => ({
+        [contactsActions.editContact]: (state, action) => ({
             ...state,
             contacts: [
                 ...state.contacts.map(contact =>
@@ -54,25 +43,25 @@ const contactsReducer = createReducer(
                 ),
             ],
         }),
-        [setFilter]: (state, action) => ({
+        [contactsActions.setFilter]: (state, action) => ({
             ...state,
             filter: action.payload,
         }),
-        [setAlert]: state => ({
+        [contactsActions.setAlert]: state => ({
             ...state,
             showEmptyAlert: false,
             showUsedAlert: false,
         }),
 
-        [setLoading]: state => ({
+        [contactsActions.setLoading]: state => ({
             ...state,
             loading: !state.loading,
         }),
-        [setError]: (state, action) => ({
+        [contactsActions.setError]: (state, action) => ({
             ...state,
             error: action.payload,
         }),
-        [signOutAction]: (state, action) => ({
+        [contactsActions.signOutAction]: () => ({
             ...initialState,
         }),
     },

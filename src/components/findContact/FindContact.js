@@ -1,16 +1,20 @@
 import React from 'react';
 import styles from './Find.module.css';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilter } from '../../redux/contacts/contactsActions';
+import contactsActions from '../../redux/contacts/contactsActions';
+import contactsSelectors from '../../redux/contacts/contactsSelectors';
 
 const FindContact = () => {
-    const filter = useSelector(state => state.reducerContacts.filter);
     const dispatch = useDispatch();
+
+    const filter = useSelector(contactsSelectors.getFilter);
+
     const onHandleChange = e => {
         const { value } = e.target;
-        dispatch(setFilter(value));
+        dispatch(contactsActions.setFilter(value));
     };
+
     return (
         <>
             <input
@@ -26,7 +30,7 @@ const FindContact = () => {
 
 export default FindContact;
 
-// FindContact.propTypes = {
-//     filter: PropTypes.string.isRequired,
-//     setFilter: PropTypes.func.isRequired,
-// };
+FindContact.propTypes = {
+    filter: PropTypes.string,
+    setFilter: PropTypes.func,
+};

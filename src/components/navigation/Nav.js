@@ -2,22 +2,24 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { phbookRoutes } from '../../routes/phbookRoutes';
-// import Container from '../layout/container/Container';
 import styles from './Nav.module.css';
 import NavItem from './NavItem';
 import UserMenu from '../userMenu/UserMenu';
 
 import authActions from '../../redux/auth/authActions';
-import { signOutAction } from '../../redux/contacts/contactsActions';
+import contactsActions from '../../redux/contacts/contactsActions';
+import authSelectors from '../../redux/auth/authSelectors';
 
 const Navigation = () => {
-    const isAuth = useSelector(state => state.auth.isAuth);
-
     const dispatch = useDispatch();
+
+    const isAuth = useSelector(authSelectors.isAuth);
+
     const onHandleClick = () => {
         dispatch(authActions.signOut());
-        dispatch(signOutAction());
+        dispatch(contactsActions.signOutAction());
     };
+
     return (
         <div className={styles.container__navbar}>
             <nav className={styles.navbar}>

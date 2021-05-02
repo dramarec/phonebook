@@ -10,7 +10,7 @@ const setLoading = createAction('@contact/setLoading');
 const setError = createAction('@contact/setError');
 const signOutAction = createAction('@contact/signOutAction');
 
-export {
+const contactsActions = {
     addNewContact,
     deleteContact,
     editContact,
@@ -21,3 +21,5 @@ export {
     setError,
     signOutAction,
 };
+
+export default contactsActions;

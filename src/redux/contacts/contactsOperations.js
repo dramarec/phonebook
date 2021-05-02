@@ -1,35 +1,33 @@
 import axios from 'axios';
-import {
-    addNewContact,
-    setError,
-    setLoading,
-    getAllContacts,
-    deleteContact,
-    editContact,
-} from './contactsActions';
+import contactsActions from './contactsActions';
 
 const addNewContactOperations = contacts => async (dispatch, getState) => {
     const idToken = getState().auth.idToken;
     const userId = getState().auth.localId;
-    dispatch(setLoading());
+    dispatch(contactsActions.setLoading());
     // axios.defaults.headers.common['Authorization'] = idToken;
     try {
         const response = await axios.post(
             `${process.env.REACT_APP_BASE_URL}/contacts/${userId}.json?auth=${idToken}`,
             contacts,
         );
-        dispatch(addNewContact({ ...contacts, id: response.data.name }));
+        dispatch(
+            contactsActions.addNewContact({
+                ...contacts,
+                id: response.data.name,
+            }),
+        );
     } catch (error) {
-        dispatch(setError('addNewContactOperations error'));
+        dispatch(contactsActions.setError('addNewContactOperations error'));
     } finally {
-        dispatch(setLoading());
+        dispatch(contactsActions.setLoading());
     }
 };
 
 const getContactOperations = () => async (dispatch, getState) => {
     const idToken = getState().auth.idToken;
     const userId = getState().auth.localId;
-    dispatch(setLoading());
+    dispatch(contactsActions.setLoading());
     try {
         const response = await axios.get(
             `${process.env.REACT_APP_BASE_URL}/contacts/${userId}.json?auth=${idToken}`,
@@ -42,44 +40,47 @@ const getContactOperations = () => async (dispatch, getState) => {
               }))
             : [];
 
-        dispatch(getAllContacts(contacts));
+        dispatch(contactsActions.getAllContacts(contacts));
     } catch (error) {
-        dispatch(setError('getContactOperations error'));
+        dispatch(contactsActions.setError('getContactOperations error'));
     } finally {
-        dispatch(setLoading());
+        dispatch(contactsActions.setLoading());
     }
 };
+
 const deleteContactOperations = id => async (dispatch, getState) => {
     const idToken = getState().auth.idToken;
     const userId = getState().auth.localId;
-    dispatch(setLoading());
+    dispatch(contactsActions.setLoading());
     try {
         await axios.delete(
             `${process.env.REACT_APP_BASE_URL}/contacts/${userId}/${id}.json?auth=${idToken}`,
         );
-        dispatch(deleteContact(id));
+        dispatch(contactsActions.deleteContact(id));
     } catch (error) {
-        dispatch(setError('deleteContactOperations error'));
+        dispatch(contactsActions.setError('deleteContactOperations error'));
     } finally {
-        dispatch(setLoading());
+        dispatch(contactsActions.setLoading());
     }
 };
+
 const editContactOperations = editedContact => async (dispatch, getState) => {
     const idToken = getState().auth.idToken;
     const userId = getState().auth.localId;
-    dispatch(setLoading());
+    dispatch(contactsActions.setLoading());
     try {
         await axios.put(
             `${process.env.REACT_APP_BASE_URL}/contacts/${userId}/${editedContact.id}.json?auth=${idToken}`,
             editedContact,
         );
-        dispatch(editContact(editedContact));
+        dispatch(contactsActions.editContact(editedContact));
     } catch (error) {
-        dispatch(setError(error));
+        dispatch(contactsActions.setError(error));
     } finally {
-        dispatch(setLoading());
+        dispatch(contactsActions.setLoading());
     }
 };
+
 export {
     addNewContactOperations,
     getContactOperations,
