@@ -1,27 +1,21 @@
-import {
-    SIGNIN,
-    SIGNOUT,
-    SIGNUP,
-    SETLOADING,
-    SETERROR,
-    SETNAME,
-    GETNAME,
-} from './authConstants';
+import { createAction } from '@reduxjs/toolkit';
 
-const signUp = user => ({ type: SIGNUP, payload: user });
-const signIn = user => ({ type: SIGNIN, payload: user });
-const signOut = () => ({ type: SIGNOUT });
-const setLoading = () => ({ type: SETLOADING });
-const setError = error => ({ type: SETERROR, payload: error });
-const addUserName = user => ({ type: SETNAME, payload: user });
-const getUserName = user => ({ type: GETNAME, payload: user });
+const signUp = createAction('@auth/SignUp');
+const signIn = createAction('@auth/SignIn');
+const signOut = createAction('@auth/SignOut');
+const setLoading = createAction('@auth/SetLoading');
+const setError = createAction('@auth/SetError');
+const addUserName = createAction('@auth/addUserName');
+const getUserName = createAction('@auth/getUserName');
 
-export {
-    addUserName,
-    getUserName,
+const authActions = {
     signUp,
     signIn,
     signOut,
     setLoading,
     setError,
+    addUserName,
+    getUserName,
 };
+
+export default authActions;

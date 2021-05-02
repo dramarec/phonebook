@@ -1,12 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { signOut } from '../../redux/auth/authActions';
 import { phbookRoutes } from '../../routes/phbookRoutes';
 // import Container from '../layout/container/Container';
 import styles from './Nav.module.css';
 import NavItem from './NavItem';
 import UserMenu from '../userMenu/UserMenu';
+
+import authActions from '../../redux/auth/authActions';
 import { signOutAction } from '../../redux/contacts/contactsActions';
 
 const Navigation = () => {
@@ -14,7 +15,7 @@ const Navigation = () => {
 
     const dispatch = useDispatch();
     const onHandleClick = () => {
-        dispatch(signOut());
+        dispatch(authActions.signOut());
         dispatch(signOutAction());
     };
     return (

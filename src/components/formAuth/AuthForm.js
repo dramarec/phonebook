@@ -8,7 +8,7 @@ import {
     signUpOperations,
 } from '../../redux/auth/authOperations';
 import { NoticeError } from '../natification/Natification';
-import { setError } from '../../redux/auth/authActions';
+import authActions from '../../redux/auth/authActions';
 
 const initialState = {
     name: '',
@@ -24,7 +24,7 @@ const AuthForm = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            dispatch(setError(''));
+            dispatch(authActions.setError(''));
         }, 2500);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [error]);
